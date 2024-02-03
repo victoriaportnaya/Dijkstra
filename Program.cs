@@ -38,6 +38,18 @@ public class MinHeap
         elements[first] = elements[second];
         elements[second] = temp;
     }
+    // complementary methods 
+    private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
+    private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
+    private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
+
+    private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < size;
+    private bool HasRighChild(int elementIndex) => GetRightChildIndex(elementIndex) < size;
+    private bool IsRoot(int elementIndex) => elementIndex == 0;
+
+    private int GetLeftChild(int elementIndex) => elements[GetLeftChildIndex(elementIndex)];
+    private int GetRightChild(int elementIndex) => elements[GetRightChildIndex(elementIndex)];
+    private int GetParent(int elementIndex) => elements[GetParentIndex(elementIndex)];
 
     public bool IsEmpty() => size == 0;
 
@@ -83,7 +95,7 @@ public class MinHeap
     }
     
     // heapify 
-    private void HeapifyDown()
+    private void HeapifyDown() // when pop 
     {
         int index = 0;
         while (HasLeftChild(index))
@@ -103,7 +115,7 @@ public class MinHeap
         }
     }
 
-    private void HeapifyUp() // 
+    private void HeapifyUp() // when add
     {
         var index = size - 1;
         while (!IsRoot(index) && elements[index] < GetParent(index))
