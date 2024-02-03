@@ -61,7 +61,7 @@ public class MinHeap
         var root = elements[0]; // root
         elements[0] = elements[size - 1] // set new root
         size--;
-        ReCalculateDown(); // reassambly the tree 
+        HeapifyDown(); // reassambly the tree 
         
         return root;
     }
@@ -72,7 +72,7 @@ public class MinHeap
             Resize(); // if no enough space
         elements[size] = element;
         size++;
-        RecalculateUp(); // reassembly the tree to add new elements
+        HeapifyUp(); // reassembly the tree to add new elements
     }
 
     private void Resize() // if not enough space for adding
@@ -80,6 +80,38 @@ public class MinHeap
         int[] newElements = new int[elements.Length * 2];
         Array.Copy(elements, newElements, elements.Length);
         elements = newElements;
+    }
+    
+    // heapify 
+    private void HeapifyDown()
+    {
+        int index = 0;
+        while (HasLeftChild(index))
+        {
+            var smallerIndex = GetLeftChildIndex(index);
+            if (HasRightChild(index) && GetRightChild(index) < GetLeftChildIndex(index))
+            {
+                smallerIndex = GetRightChildIndex(index);
+            }
+
+            if (elements[smallerIndex] >= elements[index])
+            {
+                break; 
+            }
+            Swap(smallerIndex, index);
+            index = smallerIndex;
+        }
+    }
+
+    private void HeapifyUp() // 
+    {
+        var index = size - 1;
+        while (!IsRoot(index) && elements[index] < GetParent(index))
+        {
+            var parentIndex = GetParentIndex();
+            Swap(parentIndex, index);
+            index = parentIndex;
+        }
     }
 
 }
