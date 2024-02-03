@@ -65,4 +65,21 @@ public class MinHeap
         
         return root;
     }
+
+    public void Add(int element) //add new node
+    {
+        if (size == elements.Length)
+            Resize(); // if no enough space
+        elements[size] = element;
+        size++;
+        RecalculateUp(); // reassembly the tree to add new elements
+    }
+
+    private void Resize() // if not enough space for adding
+    {
+        int[] newElements = new int[elements.Length * 2];
+        Array.Copy(elements, newElements, elements.Length);
+        elements = newElements;
+    }
+
 }
