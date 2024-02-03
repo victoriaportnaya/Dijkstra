@@ -21,10 +21,12 @@ int finRow = Convert.ToInt32(Console.ReadLine());
 var start = new Point(startCol, startRow);
 var finish = new Point(finCol, finRow);
 
+
+
 // heap
 public class MinHeap
 {
-    private readonly int[] elements; // keep heap elements 
+    private int[] elements; // keep heap elements 
     private int size; // starting size 
 
     public MinHeap(int size)
@@ -44,7 +46,7 @@ public class MinHeap
     private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
 
     private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < size;
-    private bool HasRighChild(int elementIndex) => GetRightChildIndex(elementIndex) < size;
+    private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < size;
     private bool IsRoot(int elementIndex) => elementIndex == 0;
 
     private int GetLeftChild(int elementIndex) => elements[GetLeftChildIndex(elementIndex)];
@@ -71,7 +73,7 @@ public class MinHeap
         }
 
         var root = elements[0]; // root
-        elements[0] = elements[size - 1] // set new root
+        elements[0] = elements[size - 1]; // set new root
         size--;
         HeapifyDown(); // reassambly the tree 
         
@@ -120,10 +122,15 @@ public class MinHeap
         var index = size - 1;
         while (!IsRoot(index) && elements[index] < GetParent(index))
         {
-            var parentIndex = GetParentIndex();
+            var parentIndex = GetParentIndex(index);
             Swap(parentIndex, index);
             index = parentIndex;
         }
     }
-
+    
+    // dict with points and distances where all distances = 10000000, start = 0; add to heap;
+    // check neighbours if neighbour == wall, distance = 1000000, if not wall = 1;
+    // update distances and heapify;
+    // return path;
+    
 }
