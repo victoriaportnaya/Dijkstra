@@ -7,7 +7,7 @@
     {
         private const string Wall = "█";
 
-        private const string Space = " ";
+        public const string Space = " ";
 
         private readonly MapGeneratorOptions options;
 
